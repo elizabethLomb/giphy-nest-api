@@ -1,10 +1,15 @@
 import { Module } from '@nestjs/common'
-import { AppController } from './app.controller'
-import { AppService } from './app.service'
+import { ConfigModule } from '@nestjs/config'
+import mainConfig from 'config/main.config'
+import { GifModule } from './gif/gif.module'
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    GifModule,
+    ConfigModule.forRoot({
+      load: [mainConfig],
+      isGlobal: true
+    })
+  ]
 })
 export class AppModule {}
