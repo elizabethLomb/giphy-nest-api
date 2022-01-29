@@ -1,14 +1,15 @@
 import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 import mainConfig from 'config/main.config'
-import { GifModule } from './gif/gif.module'
+import databaseConfig from 'config/database.config'
+import { GifModule } from './common/v1/gif/gif.module'
 
 @Module({
   imports: [
     GifModule,
     ConfigModule.forRoot({
-      load: [mainConfig],
-      isGlobal: true
+      load: [mainConfig, databaseConfig],
+      expandVariables: true
     })
   ]
 })
